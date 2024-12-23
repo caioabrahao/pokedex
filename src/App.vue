@@ -1,5 +1,31 @@
 <script setup>
+import { ref, onMounted } from 'vue';
+import { createApp } from 'vue';
 import PokemonCard from './components/PokemonCard.vue';
+
+const targetDiv = document.getElementById('pokemonList');
+
+onMounted(() => {
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=10&offset=0")
+    .then(response => response.json())
+    .then(pokeAPI => {
+        pokeAPI.results.forEach(element => {
+            fetch(element.url)
+                .then(response => response.json())
+                .then(response => {
+                    console.log(response.name);
+
+                    const app = createApp(PokemonCard);
+                    app.mount(targetDiv);
+                });
+        });
+
+    })
+    .catch(error => {
+        console.error(error);
+    });
+
+});
 
 </script>
 
@@ -8,8 +34,6 @@ import PokemonCard from './components/PokemonCard.vue';
         <section class="section">
             <h1>Pokédex</h1>
             <div class="pokemonList">
-                <PokemonCard></PokemonCard>
-                <PokemonCard></PokemonCard>
                 <PokemonCard></PokemonCard>
                 <PokemonCard></PokemonCard>
                 <PokemonCard></PokemonCard>

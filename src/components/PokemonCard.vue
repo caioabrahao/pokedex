@@ -1,12 +1,25 @@
 <script setup>
-
+    defineProps({
+        name: {
+            type: String,
+            default: 'Bulbasaur'
+        },
+        image: {
+            type: String,
+            default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'
+        },
+        type: {
+            type: String,
+            default: 'Grass/Poison'
+        }
+    });
 </script>
 
 <template>
     <div class="pokemonCard">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="Bulbasaur">
-        <h2>Bulbasaur</h2>
-        <p>Grass</p>
+        <img :src="image" :alt="name">
+        <h2>{{ name }}</h2>
+        <p>{{ type }}</p>
     </div>
 </template>
 
