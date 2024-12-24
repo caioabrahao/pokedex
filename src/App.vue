@@ -3,28 +3,34 @@ import { ref } from 'vue';
 import PokemonCard from './components/PokemonCard.vue';
 
 const pokemonList = ref([]);
+let pageOffset = ref(0);
 
-fetch("https://pokeapi.co/api/v2/pokemon?limit=50&offset=0")
-  .then(response => response.json())
-  .then(async (data) => {
-    // Map each Pokémon to a fetch request
-    const fetchPromises = data.results.map(pokemonData => {
-      return fetch(pokemonData.url)
+let pageIndex = 0;
+
+function loadPokemonList(pageIndex){
+    fetch(`https://pokeapi.co/api/v2/pokemon?limit=50&offset=${ pageIndex }`)
         .then(response => response.json())
-        .then(pokemonDetail => ({
-          name: pokemonDetail.name,
-          id: pokemonDetail.id,
-          sprite: pokemonDetail.sprites.front_default,
-          type: pokemonDetail.types.map(type => type.type.name).join(', '),
-          typeId: pokemonDetail.types.map(type => type.type.url.split('/').slice(-2, -1)[0])
-        }))
-    });
+        .then(async (data) => {
+            // Map each Pokémon to a fetch request
+            const fetchPromises = data.results.map(pokemonData => {
+            return fetch(pokemonData.url)
+                .then(response => response.json())
+                .then(pokemonDetail => ({
+                name: pokemonDetail.name,
+                id: pokemonDetail.id,
+                sprite: pokemonDetail.sprites.front_default,
+                type: pokemonDetail.types.map(type => type.type.name).join(', '),
+                typeId: pokemonDetail.types.map(type => type.type.url.split('/').slice(-2, -1)[0])
+                }))
+            });
 
     // Wait for all fetches to complete and then sort the results by ID
     const pokemonDetails = await Promise.all(fetchPromises);
     pokemonList.value = pokemonDetails.sort((a, b) => a.id - b.id);
   })
   .catch(error => console.error('Error:', error));
+}
+loadPokemonList();
 </script>
 
 
@@ -40,8 +46,10 @@ fetch("https://pokeapi.co/api/v2/pokemon?limit=50&offset=0")
                     :type="pokemon.type"
                     :typeIds="pokemon.typeId"/>
                 </div>
-                
-                
+            </div>
+            <div class="pageControl">
+                <button @click="pageIndex > 0 && loadPokemonList(pageIndex -= 50)">Previous</button>
+                <button @click="loadPokemonList(pageIndex += 50)">Next</button>
             </div>
         </section>
     </main>

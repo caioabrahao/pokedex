@@ -47,6 +47,7 @@
         padding: 1rem;
         text-align: center;
         width: 200px;
+        height: 350px;
 
         transition: all 0.3s;
     }
@@ -57,6 +58,15 @@
     .pokemonCard img{
         width: 100%;
         height: auto;
+    }
+
+    .typeIcons{
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        align-items: center;
+        justify-content: center;
     }
 
     .name{
