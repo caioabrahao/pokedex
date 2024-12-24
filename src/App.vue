@@ -3,12 +3,27 @@ import { ref } from 'vue';
 import PokemonCard from './components/PokemonCard.vue';
 
 const pokemonList = ref([]);
-let pageOffset = ref(0);
-
 let pageIndex = 0;
+let itemsPerPage = 12;
+let maxPokemonNumber;
+
+fetch("https://pokeapi.co/api/v2/pokemon")
+    .then(response => response.json())
+    .then(data => {
+        maxPokemonNumber = data.count;
+        console.log(maxPokemonNumber);
+    })
+    .catch(error => console.error('Error:', error));
+
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
 
 function loadPokemonList(pageIndex){
-    fetch(`https://pokeapi.co/api/v2/pokemon?limit=50&offset=${ pageIndex }`)
+    fetch(`https://pokeapi.co/api/v2/pokemon?limit=${ itemsPerPage }&offset=${ pageIndex }`)
         .then(response => response.json())
         .then(async (data) => {
             // Map each Pokémon to a fetch request
@@ -31,6 +46,8 @@ function loadPokemonList(pageIndex){
   .catch(error => console.error('Error:', error));
 }
 loadPokemonList();
+
+
 </script>
 
 
@@ -47,9 +64,11 @@ loadPokemonList();
                     :typeIds="pokemon.typeId"/>
                 </div>
             </div>
-            <div class="pageControl">
-                <button @click="pageIndex > 0 && loadPokemonList(pageIndex -= 50)">Previous</button>
-                <button @click="loadPokemonList(pageIndex += 50)">Next</button>
+            <div class="paginationControl">
+                <button @click="loadPokemonList(0); scrollToTop()">First Page</button>
+                <button @click="pageIndex > 0 && loadPokemonList(pageIndex -= itemsPerPage); scrollToTop()">Previous</button>
+                <button @click="pageIndex < maxPokemonNumber-itemsPerPage && loadPokemonList(pageIndex += itemsPerPage); scrollToTop()">Next</button>
+                <button @click="loadPokemonList(pageIndex = maxPokemonNumber-itemsPerPage); scrollToTop()">Last Page</button>
             </div>
         </section>
     </main>
