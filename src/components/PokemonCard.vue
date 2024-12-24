@@ -2,24 +2,29 @@
     defineProps({
         name: {
             type: String,
-            default: 'Bulbasaur'
+            default: 'NAME'
         },
         image: {
             type: String,
-            default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'
+            default: ''
         },
         type: {
             type: String,
-            default: 'Grass/Poison'
+            default: 'Type'
+        },
+        id: {
+            type: Number,
+            default: 0
         }
     });
 </script>
 
 <template>
     <div class="pokemonCard">
+        <p>#{{ id }}</p>
         <img :src="image" :alt="name">
-        <h2>{{ name }}</h2>
-        <p>{{ type }}</p>
+        <h2 class="name">{{ name }}</h2>
+        <p class="type">{{ type }}</p>
     </div>
 </template>
 
@@ -43,7 +48,14 @@
     }
 
     .pokemonCard img{
-        width: 100px;
-        height: 100px;
+        width: 100%;
+        height: auto;
+    }
+
+    .name{
+        text-transform: capitalize;
+    }
+    .type{
+        text-transform: capitalize;
     }
 </style>
