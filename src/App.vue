@@ -1,31 +1,72 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import { createApp } from 'vue';
 import PokemonCard from './components/PokemonCard.vue';
 
-const targetDiv = document.getElementById('pokemonList');
-
-onMounted(() => {
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=10&offset=0")
-    .then(response => response.json())
-    .then(pokeAPI => {
-        pokeAPI.results.forEach(element => {
-            fetch(element.url)
-                .then(response => response.json())
-                .then(response => {
-                    console.log(response.name);
-
-                    const app = createApp(PokemonCard);
-                    app.mount(targetDiv);
-                });
-        });
-
-    })
-    .catch(error => {
-        console.error(error);
-    });
-
-});
+const pokemonList = [
+    {
+        name: 'Bulbasaur',
+        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png',
+        type: 'Grass/Poison'
+    },
+    {
+        name: 'Ivysaur',
+        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png',
+        type: 'Grass/Poison'
+    },
+    {
+        name: 'Venusaur',
+        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png',
+        type: 'Grass/Poison'
+    },
+    {
+        name: 'Charmander',
+        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png',
+        type: 'Fire'
+    },
+    {
+        name: 'Charmeleon',
+        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png',
+        type: 'Fire'
+    },
+    {
+        name: 'Charizard',
+        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png',
+        type: 'Fire/Flying'
+    },
+    {
+        name: 'Squirtle',
+        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png',
+        type: 'Water'
+    },
+    {
+        name: 'Wartortle',
+        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/8.png',
+        type: 'Water'
+    },
+    {
+        name: 'Blastoise',
+        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png',
+        type: 'Water'
+    },
+    {
+        name: 'Caterpie',
+        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10.png',
+        type: 'Bug'
+    },
+    {
+        name: 'Metapod',
+        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/11.png',
+        type: 'Bug'
+    },
+    {
+        name: 'Butterfree',
+        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/12.png',
+        type: 'Bug/Flying'
+    },
+    {
+        name: 'Weedle',
+        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/13.png',
+        type: 'Bug/Poison'
+    }];
 
 </script>
 
@@ -34,9 +75,11 @@ onMounted(() => {
         <section class="section">
             <h1>Pokédex</h1>
             <div class="pokemonList">
-                <PokemonCard></PokemonCard>
-                <PokemonCard></PokemonCard>
-                <PokemonCard></PokemonCard>
+                <div  v-for="pokemon in pokemonList">
+                    <PokemonCard :name="pokemon.name" :image="pokemon.image" :type="pokemon.type"/>
+                </div>
+                
+                
             </div>
         </section>
     </main>
