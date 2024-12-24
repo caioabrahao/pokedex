@@ -12,6 +12,10 @@
             type: String,
             default: 'Type'
         },
+        typeIds: {
+            type: Array,
+            default: []
+        },
         id: {
             type: Number,
             default: 0
@@ -24,7 +28,10 @@
         <p>#{{ id }}</p>
         <img :src="image" :alt="name">
         <h2 class="name">{{ name }}</h2>
-        <p class="type">{{ type }}</p>
+        
+        <div class="typeIcons">
+            <img v-for="typeId in typeIds" :key="typeId" :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${typeId}.png`" :alt="`type ${typeId}`">
+        </div>
     </div>
 </template>
 

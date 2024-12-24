@@ -14,9 +14,10 @@ fetch("https://pokeapi.co/api/v2/pokemon?limit=50&offset=0")
         .then(pokemonDetail => ({
           name: pokemonDetail.name,
           id: pokemonDetail.id,
-          type: pokemonDetail.types.map(type => type.type.name).join(', '),
           sprite: pokemonDetail.sprites.front_default,
-        }));
+          type: pokemonDetail.types.map(type => type.type.name).join(', '),
+          typeId: pokemonDetail.types.map(type => type.type.url.split('/').slice(-2, -1)[0])
+        }))
     });
 
     // Wait for all fetches to complete and then sort the results by ID
@@ -33,7 +34,11 @@ fetch("https://pokeapi.co/api/v2/pokemon?limit=50&offset=0")
             <h1>Pokédex</h1>
             <div class="pokemonList">
                 <div  v-for="pokemon in pokemonList" :key="pokemon.id">
-                    <PokemonCard :id="pokemon.id" :name="pokemon.name" :image="pokemon.sprite" :type="pokemon.type"/>
+                    <PokemonCard :id="pokemon.id" 
+                    :name="pokemon.name" 
+                    :image="pokemon.sprite" 
+                    :type="pokemon.type"
+                    :typeIds="pokemon.typeId"/>
                 </div>
                 
                 
