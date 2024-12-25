@@ -6,7 +6,7 @@ import Footer from './components/Footer.vue';
 
 const pokemonList = ref([]);
 let pageIndex = 0;
-let itemsPerPage = 30;
+let itemsPerPage = 32;
 let maxPokemonNumber;
 
 fetch("https://pokeapi.co/api/v2/pokemon")
@@ -67,13 +67,21 @@ const filteredPokemonList = computed(() => {
     <Header />
     <main>
         <section class="section">
+            <h1>Search for a Pokémon!</h1>
+
             <div class="searchContainer">
-                <input class="searchBox" v-model="searchQuery" type="text" placeholder="Search for a Pokémon">
+                <input class="searchBox" v-model="searchQuery" type="text" placeholder="Enter a Pokémon name">
                 <button class="button-2"><span class="material-symbols-outlined">search</span></button>
             </div>
-            <p>{{ searchQuery }}</p>
 
-            <p>{{ pageIndex / itemsPerPage }}</p>
+        
+            <div class="paginationTop">
+                <p>Page {{ pageIndex/itemsPerPage + 1 }} of {{ Math.ceil(maxPokemonNumber/itemsPerPage) }}</p>
+                <div class="buttons">
+                    <button class="button-2" @click="pageIndex > 0 && loadPokemonList(pageIndex -= itemsPerPage); scrollToTop()"><i class="ri-arrow-left-line"></i></button>
+                    <button class="button-2" @click="pageIndex < maxPokemonNumber-itemsPerPage && loadPokemonList(pageIndex += itemsPerPage); scrollToTop()"><i class="ri-arrow-right-line"></i></button>
+                </div>
+            </div>
             <div class="pokemonList">
                 <div  v-for="pokemon in filteredPokemonList" :key="pokemon.id">
                     <PokemonCard :id="pokemon.id" 
@@ -100,20 +108,30 @@ const filteredPokemonList = computed(() => {
 <style scoped>
 
     .section{
-        padding: 32px;
+        padding: 10vh 32px 0 32px;
         text-align: center;
 
         min-height: 90vh;
+    }
 
-        background: linear-gradient(to bottom, #F4EDD3, #A5BFCC, #7E99A3, #4C585B);
+    .paginationTop{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 32px;
+    }
+    .paginationTop .buttons{
+        display: flex;
+        gap: .5rem;
     }
 
     .pokemonList{
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
         padding: 32px;
         align-items: center;
+        justify-content: center;    
     }
 
     .paginationControl{

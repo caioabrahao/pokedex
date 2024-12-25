@@ -47,10 +47,9 @@
 
         border-radius: 10px;
         background-color: blanchedalmond;
-        padding: 8px;
+        padding: 2rem;
 
-        height: 400px;
-        width: 200px;
+        
 
         transition: all 0.3s;
     }
@@ -61,17 +60,22 @@
     }
 
     .pokemonCard img{
-        width: 100%;
+        width: 160px;
         height: auto;
     }
 
     .typeIconsContainer{
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 8px;
 
         align-items: center;
         justify-content: center;
+        height: 72px;
+    }
+    .typeIconsContainer img{
+        width: auto;
+        height: 32px;
     }
 
     .name{
