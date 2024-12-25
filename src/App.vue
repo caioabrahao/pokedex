@@ -1,6 +1,8 @@
 <script setup>
 import { computed, ref } from 'vue';
 import PokemonCard from './components/PokemonCard.vue';
+import Header from './components/Header.vue';
+import Footer from './components/Footer.vue';
 
 const pokemonList = ref([]);
 let pageIndex = 0;
@@ -63,15 +65,14 @@ const filteredPokemonList = computed(() => {
 
 
 <template>
+    <Header />
     <main>
         <section class="section">
-            <h1>Pokédex</h1>
-            <p>{{ searchQuery }}</p>
-
             <div class="searchContainer">
-                <input v-model="searchQuery" type="text" placeholder="Search for a Pokémon">
-                <button>Search</button>
+                <input class="searchBox" v-model="searchQuery" type="text" placeholder="Search for a Pokémon">
+                <button class="button-2"><span class="material-symbols-outlined">search</span></button>
             </div>
+            <p>{{ searchQuery }}</p>
 
             <p>{{ pageIndex / itemsPerPage }}</p>
             <div class="pokemonList">
@@ -84,22 +85,28 @@ const filteredPokemonList = computed(() => {
                 </div>
             </div>
             <div class="paginationControl">
-                <button @click="loadPokemonList(pageIndex = 0); scrollToTop()">First Page</button>
-                <button @click="pageIndex > 0 && loadPokemonList(pageIndex -= itemsPerPage); scrollToTop()">Previous</button>
+                <button class="button-2" @click="loadPokemonList(pageIndex = 0); scrollToTop()"><i class="ri-arrow-left-double-line"></i></button>
+                <button class="button-2" @click="pageIndex > 0 && loadPokemonList(pageIndex -= itemsPerPage); scrollToTop()"><i class="ri-arrow-left-line"></i></button>
                 <div class="pageIndex">
                     <p>Page {{ pageIndex/itemsPerPage + 1 }} of {{ Math.ceil(maxPokemonNumber/itemsPerPage) }}</p>
                 </div>
-                <button @click="pageIndex < maxPokemonNumber-itemsPerPage && loadPokemonList(pageIndex += itemsPerPage); scrollToTop()">Next</button>
-                <button @click="loadPokemonList(pageIndex = maxPokemonNumber-itemsPerPage); scrollToTop()">Last Page</button>
+                <button class="button-2" @click="pageIndex < maxPokemonNumber-itemsPerPage && loadPokemonList(pageIndex += itemsPerPage); scrollToTop()"><i class="ri-arrow-right-line"></i></button>
+                <button class="button-2" @click="loadPokemonList(pageIndex = maxPokemonNumber-itemsPerPage); scrollToTop()"><i class="ri-arrow-right-double-fill"></i></button>
             </div>
         </section>
     </main>
+    <Footer></Footer>
 </template>
 
 <style scoped>
+
     .section{
         padding: 32px;
         text-align: center;
+
+        min-height: 90vh;
+
+        background: linear-gradient(to bottom, #F4EDD3, #A5BFCC, #7E99A3, #4C585B);
     }
 
     .pokemonList{
@@ -116,4 +123,19 @@ const filteredPokemonList = computed(() => {
         gap: 1rem;
         padding: 32px;
     }
+
+    .searchContainer{
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        padding: 32px;
+    }
+    .searchBox{
+        padding: 8px 16px; 
+        border-radius: 90px;
+        border: none;
+        width: 30%;
+        font-size: 1rem;
+    }
+    
 </style>

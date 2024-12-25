@@ -2,11 +2,30 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+
+  --globalHorizontalPagePadding: 96px;
 }
 
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.button-1 {
+  background-color: var(--primaryBlue);
+  color: var(--secondaryWhite);
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.button-2 {
+  background-color: #d4d4ae;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 90px;
+  cursor: pointer;
 }
 
