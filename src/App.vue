@@ -4,7 +4,7 @@ import PokemonCard from './components/PokemonCard.vue';
 
 const pokemonList = ref([]);
 let pageIndex = 0;
-let itemsPerPage = 12;
+let itemsPerPage = 16;
 let maxPokemonNumber;
 
 fetch("https://pokeapi.co/api/v2/pokemon")
@@ -33,7 +33,7 @@ function loadPokemonList(pageIndex){
                 .then(pokemonDetail => ({
                 name: pokemonDetail.name,
                 id: pokemonDetail.id,
-                sprite: pokemonDetail.sprites.front_default,
+                sprite: pokemonDetail.sprites.other['official-artwork'].front_default,
                 type: pokemonDetail.types.map(type => type.type.name).join(', '),
                 typeId: pokemonDetail.types.map(type => type.type.url.split('/').slice(-2, -1)[0])
                 }))
@@ -55,6 +55,7 @@ loadPokemonList();
     <main>
         <section class="section">
             <h1>Pokédex</h1>
+            <p>{{ pageIndex }}</p>
             <div class="pokemonList">
                 <div  v-for="pokemon in pokemonList" :key="pokemon.id">
                     <PokemonCard :id="pokemon.id" 
@@ -65,7 +66,7 @@ loadPokemonList();
                 </div>
             </div>
             <div class="paginationControl">
-                <button @click="loadPokemonList(0); scrollToTop()">First Page</button>
+                <button @click="loadPokemonList(pageIndex = 0); scrollToTop()">First Page</button>
                 <button @click="pageIndex > 0 && loadPokemonList(pageIndex -= itemsPerPage); scrollToTop()">Previous</button>
                 <button @click="pageIndex < maxPokemonNumber-itemsPerPage && loadPokemonList(pageIndex += itemsPerPage); scrollToTop()">Next</button>
                 <button @click="loadPokemonList(pageIndex = maxPokemonNumber-itemsPerPage); scrollToTop()">Last Page</button>

@@ -53,6 +53,8 @@
     }
     .pokemonCard:hover{
         background-color: #f0f0f0;
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
     .pokemonCard img{
