@@ -60,7 +60,6 @@ const filteredPokemonList = computed(() => {
   );
 });
 
-
 </script>
 
 

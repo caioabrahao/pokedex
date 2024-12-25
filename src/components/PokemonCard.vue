@@ -29,7 +29,7 @@
         <img :src="image" :alt="name">
         <h2 class="name">{{ name }}</h2>
         
-        <div class="typeIcons">
+        <div class="typeIconsContainer">
             <img v-for="typeId in typeIds" :key="typeId" :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${typeId}.png`" :alt="`type ${typeId}`">
         </div>
     </div>
@@ -41,13 +41,16 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-
-        border: 1px solid #000000;
-        border-radius: 5px;
-        padding: 1rem;
         text-align: center;
+
+        overflow: hidden;
+
+        border-radius: 10px;
+        background-color: blanchedalmond;
+        padding: 8px;
+
+        height: 400px;
         width: 200px;
-        height: 350px;
 
         transition: all 0.3s;
     }
@@ -62,7 +65,7 @@
         height: auto;
     }
 
-    .typeIcons{
+    .typeIconsContainer{
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
