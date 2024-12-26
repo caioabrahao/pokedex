@@ -3,6 +3,7 @@ import { computed, ref } from 'vue';
 import PokemonCard from './components/PokemonCard.vue';
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
+import PokemonModal from './components/PokemonModal.vue';
 
 const pokemonList = ref([]);
 let pageIndex = 0;
@@ -60,10 +61,24 @@ const filteredPokemonList = computed(() => {
   );
 });
 
+const modalOpen = ref(false);
+
+const selectedPokemon = ref({});
+
+function openModal(pokemon){
+    selectedPokemon.value = pokemon;
+    modalOpen.value = true;
+}
+
+function closeModal(){
+    modalOpen.value = false;
+}
+
 </script>
 
 
 <template>
+    <PokemonModal :pokemon="selectedPokemon" @close="closeModal" v-if="modalOpen"/>
     <Header />
     <main>
         <section class="section">
@@ -83,13 +98,13 @@ const filteredPokemonList = computed(() => {
                 </div>
             </div>
             <div class="pokemonList">
-                <div  v-for="pokemon in filteredPokemonList" :key="pokemon.id">
-                    <PokemonCard :id="pokemon.id" 
+                <PokemonCard   v-for="pokemon in filteredPokemonList" :key="pokemon.id" 
+                    @Click="openModal(pokemon)"
+                    :id="pokemon.id" 
                     :name="pokemon.name" 
                     :image="pokemon.sprite" 
                     :type="pokemon.type"
                     :typeIds="pokemon.typeId"/>
-                </div>
             </div>
             <div class="paginationControl">
                 <button class="button-2" @click="loadPokemonList(pageIndex = 0); scrollToTop()"><i class="ri-arrow-left-double-line"></i></button>
@@ -153,6 +168,7 @@ const filteredPokemonList = computed(() => {
         border: none;
         width: 30%;
         font-size: 1rem;
+        background-color: rgb(225, 225, 225);
     }
     
 </style>

@@ -46,10 +46,12 @@
         overflow: hidden;
 
         border-radius: 10px;
-        background-color: blanchedalmond;
+        background-color: rgb(220, 220, 220);
         padding: 2rem;
 
-        
+        border: 1px solid rgba(0, 0, 0, 0.2);
+
+        cursor: pointer;
 
         transition: all 0.3s;
     }
@@ -80,6 +82,11 @@
 
     .name{
         text-transform: capitalize;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+
     }
     .type{
         text-transform: capitalize;
