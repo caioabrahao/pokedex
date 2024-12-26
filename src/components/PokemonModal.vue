@@ -34,8 +34,11 @@ window.addEventListener('keydown', handleKeydown);
         
         
         <div class="info">
-            <h2>{{ pokemon.name }}</h2>
-            <p><i class="ri-hashtag"></i> ID: {{ pokemon.id }}</p>
+            <div class="nameAndId">
+                <h2 class="name">{{ pokemon.name }}</h2>
+                <p class="id"><i class="ri-hashtag"></i>{{ pokemon.id }}</p>
+            </div>
+            
             <p><i class="ri-expand-height-fill"></i> Height: {{ pokemon.height }}m</p>
             <p><i class="ri-weight-fill"></i> Weight: {{ pokemon.weight }}kg</p>
             <p><i class="ri-sword-fill"></i> Abilities: {{ pokemon.abilities }}</p>
@@ -85,18 +88,28 @@ window.addEventListener('keydown', handleKeydown);
     height: 50%;
 }
 
+.nameAndId{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 8px;
+}
 .imageContainer{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 50%;
-
-    background-color: rgba(128, 128, 128, 0.2);
-    border-radius: 100%;
 }
 .image{
     width: auto;
-    height: 50%;
+    height: 70%;
+}
+
+.id{
+    background-color: rgba(128, 128, 128, 0.2);
+    padding: 4px 8px;
+    border-radius: 16px;
 }
 
 .info{
@@ -104,6 +117,13 @@ window.addEventListener('keydown', handleKeydown);
     flex-direction: column;
     justify-content: center;
     width: 50%;
+
+    text-transform: capitalize;
+}
+.name{
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: capitalize;
 }
 
 .types{
