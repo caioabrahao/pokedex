@@ -37,6 +37,14 @@ function loadPokemonList(pageIndex){
                 name: pokemonDetail.name,
                 id: pokemonDetail.id,
                 sprite: pokemonDetail.sprites.other['official-artwork'].front_default,
+                spriteGif: pokemonDetail.sprites.other['showdown'].front_default,
+                spriteSvg: pokemonDetail.sprites.other['dream_world'].front_default,
+
+                abilities: pokemonDetail.abilities.map(ability => ability.ability.name).join(', '),
+                height: pokemonDetail.height,
+                weight: pokemonDetail.weight,
+                baseExperience: pokemonDetail.base_experience,
+                
                 type: pokemonDetail.types.map(type => type.type.name).join(', '),
                 typeId: pokemonDetail.types.map(type => type.type.url.split('/').slice(-2, -1)[0])
                 }))
