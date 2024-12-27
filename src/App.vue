@@ -7,7 +7,7 @@ import PokemonModal from './components/PokemonModal.vue';
 
 const pokemonList = ref([]);
 let pageIndex = 0;
-let itemsPerPage = 32;
+let itemsPerPage = 20;
 let maxPokemonNumber;
 
 fetch("https://pokeapi.co/api/v2/pokemon")
@@ -131,7 +131,7 @@ function closeModal(){
 <style scoped>
 
     .section{
-        padding: 10vh 32px 0 32px;
+        padding: 10vh var(--globalHorizontalPagePadding) 0 var(--globalHorizontalPagePadding);
         text-align: center;
 
         min-height: 90vh;
@@ -155,6 +155,8 @@ function closeModal(){
         padding: 32px;
         align-items: center;
         justify-content: center;    
+
+        width: 100%;
     }
 
     .paginationControl{
@@ -177,6 +179,26 @@ function closeModal(){
         width: 30%;
         font-size: 1rem;
         background-color: rgb(225, 225, 225);
+    }
+
+
+    @media (max-width: 1082px){
+        .pokemonList{
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        }
+        .searchContainer{
+            flex-direction: row;
+            gap: .5rem;
+            padding: 32px 0;
+
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 1);
+        }
+        .searchBox{
+            width: 100%;
+        }
     }
     
 </style>

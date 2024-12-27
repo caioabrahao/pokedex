@@ -26,12 +26,10 @@ window.addEventListener('keydown', handleKeydown);
 
 <div class="modal" @click="closeModal()">
     <div class="modalContent" @click.stop>
-        <button class="closeBtn" @click="closeModal()"><i class="ri-close-circle-line"></i></button>
 
         <div class="imageContainer">
             <img class="image" :src="pokemon.spriteGif" :alt="pokemon.name">
         </div>
-        
         
         <div class="info">
             <div class="nameAndId">
@@ -50,11 +48,9 @@ window.addEventListener('keydown', handleKeydown);
                     <img v-for="typeId in pokemon.typeId" :key="typeId" :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/${typeId}.png`" :alt="`type ${typeId}`">
                 </div>
             </div>
-            
-            
         </div>
-        
-        
+
+        <button class="closeBtn" @click="closeModal()"><i class="ri-close-circle-line"></i></button>
     </div>
 </div>
 
@@ -156,5 +152,38 @@ window.addEventListener('keydown', handleKeydown);
 
     cursor: pointer;
 
+}
+
+@media (max-width: 1082px) {
+    .modalContent{
+        flex-direction: column;
+        gap: 16px;
+        width: 80%;
+        height: 60%;
+    }
+
+    .imageContainer{
+        width: 100%;
+        height: 50%;
+    }
+
+    .info{
+        width: 100%;
+    }
+
+    .typesContainer{
+        width: 100%;
+    }
+    .types{
+        width: 100%;
+    }
+    .types img{
+        width: 100%;
+    }
+
+    .closeBtn{
+        position: static;
+        align-self: center;
+    }
 }
 </style>

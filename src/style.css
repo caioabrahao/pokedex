@@ -1,7 +1,7 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Inter", serif;
+  font-optical-sizing: auto;
   line-height: 1.5;
-  font-weight: 400;
 
   --globalHorizontalPagePadding: 96px;
 }
@@ -27,5 +27,12 @@
   padding: 8px 16px;
   border-radius: 90px;
   cursor: pointer;
+}
+
+
+@media (max-width: 1082px) {
+  :root {
+    --globalHorizontalPagePadding: 16px;
+  }
 }
 
