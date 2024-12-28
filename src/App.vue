@@ -1,5 +1,7 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted, nextTick } from 'vue';
+import { gsap } from 'gsap';
+
 import PokemonCard from './components/PokemonCard.vue';
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
@@ -82,6 +84,22 @@ function closeModal(){
     modalOpen.value = false;
 }
 
+function cardAnimate(){
+    gsap.from(".pokemonList", {
+        duration: 1,
+        y: 100,
+        opacity: 0,
+        ease: "power4.out",
+    });
+}
+
+onMounted(() => {
+    nextTick(() => {
+        cardAnimate();
+    });
+});
+
+
 </script>
 
 
@@ -91,7 +109,7 @@ function closeModal(){
     <main>
         <section class="section">
             <h1>Search for a Pokémon!</h1>
-
+            <p @click="cardAnimate">Click on a Pokémon to see more details</p>
             <div class="searchContainer">
                 <input class="searchBox" v-model="searchQuery" type="text" placeholder="Make a PokéSearch!">
                 <button class="button-2"><span class="material-symbols-outlined">search</span></button>
@@ -106,7 +124,7 @@ function closeModal(){
                 </div>
             </div>
             <div class="pokemonList">
-                <PokemonCard   v-for="pokemon in filteredPokemonList" :key="pokemon.id" 
+                <PokemonCard v-for="pokemon in filteredPokemonList" :key="pokemon.id" 
                     @Click="openModal(pokemon)"
                     :id="pokemon.id" 
                     :name="pokemon.name" 
