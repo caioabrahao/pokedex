@@ -15,7 +15,7 @@ I made this project as a way to learn about API calls and other JavaScript relat
 
 ## Roadmap (Future Features) 🧠
 
-- ⬜ Light and Dark Modes
+- ✅Light and Dark Modes
 - ⬜ Better Search System
 - ⬜ Better Pagination Framework
 - ⬜ Proper Styles and UI Design

@@ -1,23 +1,13 @@
 <script setup>
-import { ref } from 'vue';
-import gsap from 'gsap';
+import { ref, onMounted } from 'vue';
 
 const darkMode = ref(false);
-
-function animation(){
-    gsap.to('.darkModeToggle', {
-        duration: 0.7,
-        rotate: 360,
-        ease: 'elastic'
-    });
-}
 
 function toggleDarkMode(){
     darkMode.value = !darkMode.value;
     updateTheme();
 
     console.log(darkMode)
-    animation();
 }
 
 function updateTheme() {
@@ -25,19 +15,18 @@ function updateTheme() {
 
   if (darkMode.value) {
     root.classList.add('darkMode');
-    localStorage.setItem('theme', 'dark');
   } else {
     root.classList.remove('darkMode');
-    localStorage.setItem('theme', 'light');
   }
 }
+
+updateTheme(); 
 </script>
 
 
 <template>
 <div class="darkModeToggle" @click="toggleDarkMode">
-    <i v-if="darkMode === true" class="ri-moon-fill"></i>
-    <i v-else class="ri-sun-fill"></i>
+    <i id="icon" :class="[darkMode ? 'ri-moon-fill' : 'ri-sun-fill']"></i>
 </div>
 </template>
 
@@ -47,5 +36,16 @@ function updateTheme() {
     .darkModeToggle{
         font-size: 1.5rem;
         cursor: pointer;
+
+        padding: 1px 4px;
+        border-radius: 5px;
+
+        transition: all 0.3s;
+    }
+    .darkModeToggle:hover{
+        transform: scale(1.1);
+
+        background-color: rgba(240, 248, 255, 0.1);
+        
     }
 </style>

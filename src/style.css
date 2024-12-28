@@ -4,6 +4,8 @@
   line-height: 1.5;
 
   --globalHorizontalPagePadding: 96px;
+
+  transition: all 0.3s; /* !!! MAY AFFECT GSAP !!!  */
 }
 
 *{
@@ -45,5 +47,14 @@
   color: #fff;
 
   transition: all 0.3s; /* !!! MAY AFFECT GSAP !!!  */
+}
+
+.darkMode .pokemonCard{
+  color: black;
+}
+
+.darkMode .modalContent{
+  background-color: #333;
+  color: #fff;
 }
 
