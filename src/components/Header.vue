@@ -1,5 +1,5 @@
 <script setup>
-
+import DarkModeToggle from './DarkModeToggle.vue';
 </script>
 
 <template>
@@ -9,14 +9,8 @@
         <span class="subtitle">PINK SEVEN</span>
     </div>
     <div class="preferences">
-        <div class="langSelectContainer">
-        <select class="langSelect">
-            <option value="en">English</option>
-            <option value="es">Español</option>
-            <option value="pt-br">Português</option>
-        </select>
-    </div>
-    <i class="ri-sun-fill"></i>
+        
+    <DarkModeToggle />
     </div>
     
 

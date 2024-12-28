@@ -91,4 +91,10 @@
     .type{
         text-transform: capitalize;
     }
+
+    :deep(.darkMode) .pokemonCard {
+        background-color: #2c2c2c;
+        color: #fff;
+        border: 1px solid #444;
+}
 </style>

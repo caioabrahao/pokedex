@@ -40,3 +40,10 @@
   }
 }
 
+.darkMode {
+  background-color: #333;
+  color: #fff;
+
+  transition: all 0.3s; /* !!! MAY AFFECT GSAP !!!  */
+}
+
