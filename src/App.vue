@@ -93,7 +93,7 @@ function closeModal(){
             <h1>Search for a Pokémon!</h1>
 
             <div class="searchContainer">
-                <input class="searchBox" v-model="searchQuery" type="text" placeholder="Enter a Pokémon name">
+                <input class="searchBox" v-model="searchQuery" type="text" placeholder="Make a PokéSearch!">
                 <button class="button-2"><span class="material-symbols-outlined">search</span></button>
             </div>
 

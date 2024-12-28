@@ -29,6 +29,10 @@
   cursor: pointer;
 }
 
+.link {
+  text-decoration: none;
+}
+
 
 @media (max-width: 1082px) {
   :root {
