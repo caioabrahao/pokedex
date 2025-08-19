@@ -1,5 +1,4 @@
-![pokedex](https://socialify.git.ci/caioabrahao/pokedex/image?description=1&font=Rokkitt&language=1&logo=https%3A%2F%2Fgithub.com%2Fcaioabrahao%2Fpokedex%2Fblob%2Fmain%2Fpublic%2Fpink-pokeball.png%3Fraw%3Dtrue&name=1&owner=1&pattern=Transparent&stargazers=1&theme=Auto)
-
+Theres many like it, but this one is mine
 # Pokedex `V1.0` 👾
 
 A simple Pokedex application built with Vue.js and Vite.
